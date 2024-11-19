@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ question.ques }}</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            text-align: center;
+        }
+        p {
+            font-size: 18px;
+            margin: 15px 0;
+        }
+        .votes {
+            font-weight: bold;
+            color: #2980b9;
+        }
+        .winner {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .option {
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .option:hover {
+            background-color: #ecf0f1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ question.ques }}</h1>
+        <p>Total Votes: <span class="votes">{{ total_votes }}</span></p>
+        <div class="option">
+            <p>Option 1: {{ question.option1 }} - Votes: <span class="votes">{{ vote1 }}</span></p>
+        </div>
+        <div class="option">
+            <p>Option 2: {{ question.option2 }} - Votes: <span class="votes">{{ vote2 }}</span></p>
+        </div>
+        <div class="option">
+            <p>Option 3: {{ question.option3 }} - Votes: <span class="votes">{{ vote3 }}</span></p>
+        </div>
+        <div class="option">
+            <p>Option 4: {{ question.option4 }} - Votes: <span class="votes">{{ vote4 }}</span></p>
+        </div>
+        <p class="winner">Winner: {{ winner_option }}</p>
+    </div>
+</body>
+</html>

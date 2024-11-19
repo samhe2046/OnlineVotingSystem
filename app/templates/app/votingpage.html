@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        nav {
+            background-color: #f2f2f2;
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .username {
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        label {
+            font-size: 16px;
+        }
+
+        .vote-button {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            text-align: center;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .vote-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">
+            <h1>Property Online Voting System</h1>
+        </div>
+        <div class="username">
+            {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }} <a href="{% url 'logout' %}">(logout)</a></span>
+            {% endif %}
+        </div>
+    </nav>
+    <br>
+    <center>
+        <h3 style="color: tomato;">
+            {% if messages %}
+            {% for message in messages %}
+            <div>{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+        </h3>
+    </center>
+    <br><br>
+    {% for item in new_ques %}
+    <div class="container">
+        <form method="post" action="{% url 'votingpage' pk=item.pk %}">
+            {% csrf_token %}
+            <h2>{{ item.ques }}</h2>
+            <label><input type="radio" name="selected_option" value="1">{{ item.option1 }}</label><br>
+            <label><input type="radio" name="selected_option" value="2">{{ item.option2 }}</label><br>
+            <label><input type="radio" name="selected_option" value="3">{{ item.option3 }}</label><br>
+            <label><input type="radio" name="selected_option" value="4">{{ item.option4 }}</label><br>
+            <h4>Total Votes: {{item.total_votes}}</h4>
+	    <a href="{% url 'vote_results' item.id %}">View Results</a>
+            {% if item.is_closed %}
+            <p><strong>Winner: {{ item.get_winner_option }}</strong></p>
+            <button class="vote-button" type="button" disabled>
+                Voting Closed
+            </button>
+            {% else %}
+            <button class="vote-button" type="submit">
+                {% if user_profile.age > 18 %}
+                Vote Now
+                {% else %}
+                Not allowed
+                {% endif %}
+            </button>
+            {% endif %}
+        </form>
+        <br>
+    </div>
+    {% endfor %}
+
+</body>
+
+</html>
