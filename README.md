@@ -47,8 +47,8 @@ python3.9 -V
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/yourusername/property-online-voting-system.git
-cd property-online-voting-system
+git clone https://github.com/samhe2046/OnlineVotingSystem.git
+cd OnlineVotingSystem
 ```
 
 ### 3. Set Up the Virtual Environment
